@@ -29,15 +29,9 @@ const people = [
 'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
 ];
 
+//=======================================================================
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's
-for(let i = 0; i < inventors.length; i++){
-    if(inventors[i].year >= 1500 && inventors[i].year <= 1600){
-        const newArr = [inventors[i]];
-        // console.log(newArr);
-    }
-}
-
 function yearBorn(obj) {
     if(obj.year >= 1500 && obj.year <= 1600){
         return true;
@@ -45,21 +39,36 @@ function yearBorn(obj) {
 };
 console.log(inventors.filter(yearBorn));
 
+// **---> my way
+const newList = [];
+for(let i = 0; i < inventors.length; i++){
+    if(inventors[i].year >= 1500 && inventors[i].year <= 1600){
+        newList.push(inventors[i]);  
+    };
+};
+// console.log(newList);
+
+
+//============================================================
 // Array.prototype.map()
 // 2. Give us an array of the inventors first and last names
-for(let i = 0; i < inventors.length; i++){
-    const fullName = [{
-        first: inventors[i].first, 
-        last: inventors[i].last
-    }];
-    // console.log(fullName);
-};
-
 function fullName(obj) {
     return obj.first + " " + obj.last;
 };
 console.log(inventors.map(fullName));
 
+// **---> my way
+const inventorsName = [];
+for(let i = 0; i < inventors.length; i++){
+    const fullName = {
+        first: inventors[i].first, 
+        last: inventors[i].last
+    };
+    inventorsName.push(fullName);
+};
+// console.log(inventorsName);
+
+//=========================================================
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest
 function decresing(old, young) {
@@ -67,11 +76,22 @@ function decresing(old, young) {
 };
 console.log(inventors.sort(decresing));
 
+//==============================================================
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live all together?
+let ages = [];
+for(let i = 0; i < inventors.length; i++){
+    ages.push(Number(inventors[i].passed) - Number(inventors[i].year));
+};
+function totalYears(ages, total) {
+    return ages + total;
+};
+console.log("All those inventors lived a total of " + ages.reduce(totalYears) + " years");
 
+//=====================================================================
 // 5. Sort the inventors by years lived
 
+//===================================================================================
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
